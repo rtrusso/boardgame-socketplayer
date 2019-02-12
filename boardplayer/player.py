@@ -34,27 +34,27 @@ class Client(object):
 
     def handle_player(self, data):
         player = data['message']
-        print "You are player #{0}.".format(player)
+        print ("You are player #{0}.".format(player))
         self.player.player = player
 
     def handle_decline(self, data):
-        print data['message']
+        print (data['message'])
         self.running = False
 
     def handle_error(self, data):
-        print data['message'] # FIXME: do something useful
+        print (data['message']) # FIXME: do something useful
 
     def handle_illegal(self, data):
-        print data['message'] # FIXME: do something useful
+        print (data['message']) # FIXME: do something useful
 
     def handle_update(self, data):
         state = data['state']
         action = data.get('last_action', {}).get('action') or {}
         self.player.update(state)
 
-        print self.player.display(state, action)
+        print (self.player.display(state, action))
         if data.get('winners') is not None:
-            print self.player.winner_message(data['winners'])
+            print (self.player.winner_message(data['winners']))
             self.running = False
         elif data['state']['player'] == self.player.player:
             self.send(self.player.get_action())
