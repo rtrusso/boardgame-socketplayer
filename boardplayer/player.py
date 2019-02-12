@@ -22,7 +22,7 @@ class Client(object):
         while self.running:
             message = ''
             while not message.endswith('\r\n'):
-                message += self.socket.recv(4096)
+                message += str(self.socket.recv(4096), 'utf-8')
             messages = message.rstrip().split('\r\n')
             for message in messages:
                 data = json.loads(message)
@@ -60,7 +60,7 @@ class Client(object):
             self.send(self.player.get_action())
 
     def send(self, data):
-        self.socket.sendall("{0}\r\n".format(json.dumps(data)))
+        self.socket.sendall(bytes("{0}\r\n".format(json.dumps(data)), 'utf-8'))
 
 
 class HumanPlayer(object):
