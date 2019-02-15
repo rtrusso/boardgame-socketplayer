@@ -80,7 +80,7 @@ class HumanPlayer(object):
 
     def get_action(self):
         while True:
-            notation = raw_input("Please enter your action: ")
+            notation = input("Please enter your action: ")
             action = self.board.from_notation(notation)
             if action is None:
                 continue
